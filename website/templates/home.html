@@ -1,0 +1,57 @@
+
+{% extends "base.html" %} {% block title %} MOVIES TO WATCH {% endblock %}
+
+{% block content %}
+<h1 align="center">Online Movie Booking </h1>
+<div class ="container">
+    <div class="row">
+        <div class ="col md-12">
+            <div class="jumbotron p-3 ">
+                <h2>
+                    NOW SHOWING
+                    <b>MOVIES</b>
+
+                </h2>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+
+                {% for message in messages %}
+                <div class="alert alert-success alter-dismissable fade show" role="alert">
+
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                    {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <table class="table table-hover table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>MOVIES NAME</th>
+                        <th>Movie Director</th>
+                        <th>Genre</th>
+
+
+                    </tr>
+                    {% for row in movies %}
+                    <tr>
+                        <td>{{row.id}}</td>
+                        <td>{{row.movies_name}}</td>
+                        <td>{{row.movies_director}}</td>
+
+                        <td>{{row.genre}}</td>
+
+                    </tr>
+
+
+                    {% endfor %}
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

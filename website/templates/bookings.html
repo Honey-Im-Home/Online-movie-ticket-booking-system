@@ -1,0 +1,61 @@
+{% extends "root.html" %} {% block title %}BOOK MANAGE{% endblock %}
+
+{% block content %}
+<h1 align="center">Online Movie Booking </h1>
+<div class ="container">
+  <div class="row">
+    <div class ="col md-12">
+      <div class="jumbotron p-3 ">
+        <h2>
+          BOOK
+          <b>a Show</b>
+
+        </h2>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+        {% for message in messages %}
+        <div class="alert alert-success alter-dismissable fade show" role="alert">
+
+          <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">x</span>
+          </button>
+          {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <table class="table table-hover table-dark">
+          <tr>
+            <th>MOVIES NAME</th>
+            <th>Show Date</th>
+            <th>Show Time</th>
+            <th> Tickets </th>
+            <th> Price</th>
+            <th> User Id</th>
+
+
+          </tr>
+          {% for row in books %}
+          <tr>
+            <td>{{row.movies_name}}</td>
+            <td>{{row.show_date}}</td>
+            <td>{{row.show_time}}</td>
+            <td>{{row.tickets}}</td>
+            <td>{{row.price}}</td>
+            <td> {{row.user_id}}</td>
+            <td></td>
+
+
+          </tr>
+
+          {% endfor %}
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

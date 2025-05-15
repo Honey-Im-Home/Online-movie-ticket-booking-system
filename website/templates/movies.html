@@ -1,0 +1,141 @@
+{% extends "root.html" %} {% block title %}MOVIES MANAGE{% endblock %}
+
+{% block content %}
+<h1 align="center">Online Movie Booking </h1>
+<div class ="container"> 
+    <div class="row">
+      <div class ="col md-12">
+        <div class="jumbotron p-3 ">
+            <h2>
+                SHOWING
+                <b>Movies</b>
+                <button type ="button"
+                class = "btn btn-success float-right" data-toggle="modal" data-target="#anika">
+                Add New Movies
+            </button>
+            </h2>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+
+            {% for message in messages %}
+            <div class="alert alert-success alter-dismissable fade show" role="alert">
+                
+                <button type="button" class="close" data-dismiss="alert">
+                  <span aria-hidden="true">x</span>
+                </button>
+                {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <table class="table table-hover table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>MOVIES NAME</th>
+                    <th>Movie Director</th>
+                    <th>Genre</th>
+
+
+                </tr>
+                {% for row in movies %}
+                <tr>
+                    <td>{{row.id}}</td>
+                    <td>{{row.movies_name}}</td>
+                    <td>{{row.movies_director}}</td>
+                    
+                    <td>{{row.genre}}</td>
+                    <td>
+                        <a href="/update/{{row.id}}" class ="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit </a> 
+                        <a href="/delete/{{row.id}}" class ="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?')">Delete</a>
+                    </td>
+                </tr>
+<div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Update Info
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form action="/update" method="POST">
+                    <div class="form-group">
+                        <label>Movies Name:</label>
+                        <input type="hidden"  name="id" value="{{row.id}}">
+                        <input type="text" class="form-control" name="movies_name" value="{{row.movies_name}}">
+
+                    </div>
+                    <div class="form-group">
+                        <label>Movie Director</label>
+                        <input type="text" class="form-control" name="movies_director" value="{{row.movies_director}}">
+                        
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Genre:</label>
+                        <input type="text" class="form-control" name="genre" value="{{row.genre}}">
+                        
+                    </div>
+                    <div class="form-group">
+                    
+                        <button class="btn btn-primary" type="submit">Update </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                    
+                <button type="button" class="btn btn-secondary" data-dismiss ="modal">Close</button>
+            </div>
+    </div>
+    </div>
+</div>
+{% endfor %}
+</table>
+        </div>
+
+      </div>
+    </div>
+</div>
+<div id="anika" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class ="modal-content">
+        <div class ="modal-header">
+            <h4 class="modal-title"> Add Movies</h4>
+
+        </div>
+        <div class="modal-body">
+            <form action ="/movies" method ="POST">
+                
+                <div class="form-group">
+                    <label>Movies Name:</label>
+                    <input type="text" class="form-control" name ="movies_name" required="1">
+                </div>
+                <div class="form-group">
+                    <label>Movie director:</label>
+                    <input type="text" class="form-control" name ="movies_director" required="1">
+                </div>
+                
+                
+                <div class="form-group">
+                    <label>Genre:</label>
+                    <input type="text" class="form-control" name ="genre" required="1">
+                </div>
+                <div class="form-group">
+                    
+                    <button class="btn btn-primary" type="submit">Add Movies </button>
+                </div>
+                
+
+                <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-secondary" data-dismiss ="modal">Close</button>
+                </div>
+            
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

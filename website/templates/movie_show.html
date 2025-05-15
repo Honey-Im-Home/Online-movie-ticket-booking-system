@@ -1,0 +1,103 @@
+{% extends "base.html" %} {% block title %}BOOK MANAGE{% endblock %}
+
+{% block content %}
+<h1 align="center">Online Movie Booking </h1>
+<div class ="container">
+    <div class="row">
+        <div class ="col md-12">
+            <div class="jumbotron p-3 ">
+                <h2>
+                    BOOK
+                    <b>a Show</b>
+
+                </h2>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+
+                {% for message in messages %}
+                <div class="alert alert-success alter-dismissable fade show" role="alert">
+
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                    {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <table class="table table-hover table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>MOVIES NAME</th>
+                        <th>Show Date</th>
+                        <th>Show Time</th>
+                        <th> Seats </th>
+
+
+                    </tr>
+                    {% for row in shows %}
+                    <tr>
+                        <td>{{row.show_id}}</td>
+                        <td>{{row.movies_name}}</td>
+                        <td>{{row.show_date}}</td>
+                        <td>{{row.show_time}}</td>
+                        <td>{{row.seats}}</td>
+                        <td></td>
+                        <td>
+
+                            <a href="/book/{{row.show_id}}" class ="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.show_id}}">Book </a>
+                        </td>
+
+                    </tr>
+                    <div id="modaledit{{row.show_id}}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">
+                                        Book a movie show
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/book/{{row.show_id}}" method="POST">
+                                        <div class="form-group">
+                                            <label>Movie</label>
+                                            <p>{{row.movies_name}}</p>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Show Info</label>
+                                            <br>
+                                            <p>{{row.show_date}}</p>
+                                            <p>{{row.show_time}}</p>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Number of tickets:</label>
+                                            <input type="number" class="form-control" name="tickets" id="tickets">
+
+                                        </div>
+                                        <div class="form-group">
+
+                                            <button class="btn btn-primary" type="submit">Book </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-secondary" data-dismiss ="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

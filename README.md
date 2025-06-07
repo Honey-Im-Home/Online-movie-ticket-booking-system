@@ -29,11 +29,3 @@ User:
 ![user](https://user-images.githubusercontent.com/68474664/212082278-010bb800-6496-45c8-9e98-0af2a9c6d894.png)
 
 
-
-
-# Hi, I'm Anika! 👋
-
-
-## 🔗 Links
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anika-jahan-choudhury/)
-
